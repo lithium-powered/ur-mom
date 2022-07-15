@@ -103,12 +103,20 @@ def calc_power(input_array) -> int:
 
 def calc(input: str) -> int:
     input = input.lower()
-    # for i in range(0, len(input)):
-    #     char = input[i:i+1]
-    #     if char == '(':
-    #         if i > 2 and input[i-3:i-1] == "pow":
-    #             calc_pow(get_parenthesis_encapsulated_string(input, i).split(','))
-    #         else:
-    #             string = get_parenthesis_encapsulated_string(input, i).split(','))
-
+    # Pass over for parenthesis first
+    for i in range(0, len(input)):
+        char = input[i:i+1]
+        if char == '(':
+            end_index = get_parenthesis_encapsulated_string_end_index(input, i).split(','))
+            if i > 2 and input[i-3:i-1] == "pow":
+                return calc(
+                    input[:start_index] 
+                    + str(calc_power(input[start_index+1:end_index].split(','))) 
+                    + input[end_index+1]
+                )
+            return calc(
+                input[:start_index] 
+                + str(calc(input[start_index+1:end_index].split(',')))
+                + input[end_index+1]
+            )
     return 0
