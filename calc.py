@@ -132,7 +132,7 @@ def calc(input: str) -> int:
                 + input[end_index+1]
             )
     # Convert to array
-    array = re.split('+|-|/|*')
+    array = re.split('+|-|/|*', array)
     # Convert weird types to numbers
     for i in range(0, len(array)):
         if is_alphanumeric(array[i]):
