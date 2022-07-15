@@ -122,13 +122,13 @@ def calc(input: str) -> int:
             end_index = get_parenthesis_encapsulated_string_end_index(input, i).split(',')
             if i > 2 and input[i-3:i-1] == "pow":
                 return calc(
-                    input[:start_index] 
-                    + str(calc_power(input[start_index+1:end_index].split(','))) 
+                    input[:i] 
+                    + str(calc_power(input[i+1:end_index].split(','))) 
                     + input[end_index+1]
                 )
             return calc(
                 input[:start_index] 
-                + str(calc(input[start_index+1:end_index].split(',')))
+                + str(calc(input[i+1:end_index].split(',')))
                 + input[end_index+1]
             )
     # Convert to array
