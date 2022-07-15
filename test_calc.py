@@ -28,6 +28,8 @@ from calc import calc
         pytest.param("IV - I", 3, False, id="roman numerals"),
         pytest.param("iv - i", 3, False, id="roman numerals"),
         pytest.param("iv - i", 3, False, id="roman numerals"),
+        pytest.param("(", 0, True, id="invalid"),
+        pytest.param("asdasdasd", 0, True, id="invalid"),
     ]
 )
 def test_eval(expression_input: str, expression_output: int, expect_throw: bool):
