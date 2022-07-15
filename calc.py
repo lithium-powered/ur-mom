@@ -153,4 +153,4 @@ def calc(input: str) -> int:
         elif array[i] not in operators:
             array[i] = int(array[i], 10)
     # Array should now be only pure integers or operator strings
-    return 0
+    return eval(''.join(map(str, array)))
