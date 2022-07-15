@@ -10,6 +10,8 @@ from calc import calc
 )
 def test_eval(expression_input: str, expression_output: int, expect_throw: bool):
     try:
-        assert expression_output == calc(expression_input)
+        output: int = calc(expression_input)
     except:
         assert expect_throw
+    else:
+        assert output == expression_output
