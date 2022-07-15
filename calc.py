@@ -24,6 +24,13 @@ def get_parenthesis_encapsulated_string_end_index(input: str, start_index: int) 
             raise Exception("Invalid parenthesis!")
     return -1
 
+def is_alphanumeric(input) -> bool:
+    return input in [
+        "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+        "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+        "sixteen", "seventeen", "eighteen", "nineteen",
+    ]
+
 def convert_alphanumeric_to_decimal(input: str) -> int:
     numwords = {}
     units = [
@@ -54,7 +61,21 @@ def convert_alphanumeric_to_decimal(input: str) -> int:
 
     return result + current
 
+def is_roman(input) -> bool:
+    input = input.upper()
+        .replace('I', '')
+        .replace('V', '')
+        .replace('X', '')
+        .replace('L', '')
+        .replace('C', '')
+        .replace('D', '')
+        .replace('M', '')
+    if len(input) > 0:
+        return False
+    return True
+
 def convert_roman_to_decimal(input: str) -> int:
+    input = input.upper()
     def value(r):
         if (r == 'I'):
             return 1
@@ -96,13 +117,11 @@ def convert_roman_to_decimal(input: str) -> int:
             i = i + 1
     return res
 
-
 def calc_power(input_array) -> int:
     return input_array[0] ** input_array[1]
 
-
 def calc(input: str) -> int:
-    input = input.lower()
+    input = input.lower().replace(' ', '')
     # Pass over for parenthesis first
     for i in range(0, len(input)):
         char = input[i:i+1]
@@ -119,4 +138,19 @@ def calc(input: str) -> int:
                 + str(calc(input[start_index+1:end_index].split(',')))
                 + input[end_index+1]
             )
+    # Convert to array
+    array = re.split('+|-|/|*')
+    # Convert weird types to numbers
+    for i in range(0, len(array)):
+        if is_alphanumeric(array[i]):
+            array[i] = convert_alphanumeric_to_decimal(array[i])
+        elif is_roman(array[i]):
+            array[i] = convert_roman_to_decimal(array[i])
+        elif array[i].startswith('0x'):
+            array[i] = int(array[i], 16)
+        elif array[i].startswith('0b'):
+            array[i] = int(array[i], 2)
+        elif array[i] not in operators:
+            array[i] = int(array[i], 10)
+    # Array should now be only pure integers or operator strings
     return 0
