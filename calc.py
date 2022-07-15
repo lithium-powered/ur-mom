@@ -62,14 +62,7 @@ def convert_alphanumeric_to_decimal(input: str) -> int:
     return result + current
 
 def is_roman(input) -> bool:
-    input = input.upper()
-        .replace('I', '')
-        .replace('V', '')
-        .replace('X', '')
-        .replace('L', '')
-        .replace('C', '')
-        .replace('D', '')
-        .replace('M', '')
+    input = input.upper().replace('I', '').replace('V', '').replace('X', '').replace('L', '').replace('C', '').replace('D', '').replace('M', '')
     if len(input) > 0:
         return False
     return True
@@ -126,7 +119,7 @@ def calc(input: str) -> int:
     for i in range(0, len(input)):
         char = input[i:i+1]
         if char == '(':
-            end_index = get_parenthesis_encapsulated_string_end_index(input, i).split(','))
+            end_index = get_parenthesis_encapsulated_string_end_index(input, i).split(',')
             if i > 2 and input[i-3:i-1] == "pow":
                 return calc(
                     input[:start_index] 
